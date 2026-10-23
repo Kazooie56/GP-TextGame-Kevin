@@ -1,8 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿// NICK CHANGE: Unused
+//using System;
+//using System.Collections.Generic;
+//using System.Linq;
+//using System.Text;
+//using System.Threading.Tasks;
 
 namespace FirstPlayable_GP2_Kevin
 {
@@ -18,7 +19,8 @@ namespace FirstPlayable_GP2_Kevin
             _health = HP;
             _revives = revives;
         }
-        public void revive()
+        // NICK CHANGE: PascalCase
+        public void Revive()
         {
             if(_revives > 0)
             {
@@ -33,20 +35,26 @@ namespace FirstPlayable_GP2_Kevin
             {
                 _isAlive = false;
                 _health = 0;
-                revive();
+                Revive();
             }
         }
-        public bool CheakIfAlive()
+
+        public bool GetIsAlive()
         {
             return _isAlive;
         }
-        public void Heal(int Recover)
+
+        // NICK CHANGE: We're keeping track of how much health is restored for the quest, So I'm returning what gets healed.
+        public int Heal(int Recover)
         {
-            _health += Recover;
-            if (_health > _maxHealth)
+            int healed = Recover;
+            if (_health + Recover > _maxHealth)
             {
-                _health = _maxHealth;
+                healed = _maxHealth - _health;
             }
+
+            _health += healed;
+            return healed;
         }
         public void FullHeal()
         {

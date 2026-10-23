@@ -1,71 +1,77 @@
 ﻿using FirstPlayable_GP2_Kevin;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+// NICK CHANGE: Unused
+//using System;
+//using System.Linq;
+//using System.Text;
+//using System.Threading.Tasks;
 
 namespace GP_TextGame_Kevin
 {
-    internal class EnemyManager
+    internal static class EnemyManager
     {
-        public static Enemy boss = new Boss(30, 99, 21);
+        // NICK CHANGE: Boss spawn values in one place instead of repeated
+        const int BossStartX = 99;
+        const int BossStartY = 21;
+        const int BossHealth = 30;
+
+        public static Enemy boss = new Boss(BossStartX, BossStartY, BossHealth);
         public static List<Enemy> enemies = new List<Enemy>();
         public static void BossSet()
         {
-            EnemyManager.boss._health.FullHeal();
-            EnemyManager.boss._xPos = 99;
-            EnemyManager.boss._yPos = 21;
+            // NICK CHANGE: Enemy.Reset also clears moveStall and strength, which the old version missed
+            boss.Reset(BossStartX, BossStartY);
         }
-        public static void SpwanEnemies()
+        public static void SpawnEnemies()
         {
-            EnemyManager.enemies.Clear();
-            EnemyManager.enemies.Add(new Enemy(3, 4, 4));
-            EnemyManager.enemies.Add(new LostEnemy(3, 2, 14));
-            EnemyManager.enemies.Add(new Enemy(3, 21, 0));
-            EnemyManager.enemies.Add(new Enemy(3, 31, 1));
-            EnemyManager.enemies.Add(new StrongEnemy(5, 14, 16));
-            EnemyManager.enemies.Add(new TerainImunneEnemy(3, 13, 14));
-            EnemyManager.enemies.Add(new TerainImunneEnemy(3, 15, 14));
-            EnemyManager.enemies.Add(new TerainImunneEnemy(3, 19, 17));
-            EnemyManager.enemies.Add(new TerainImunneEnemy(3, 8, 16));
-            EnemyManager.enemies.Add(new Enemy(5, 19, 10));
-            EnemyManager.enemies.Add(new TerainImunneEnemy(3, 20, 2));
-            EnemyManager.enemies.Add(new TerainImunneEnemy(3, 27, 2));
-            EnemyManager.enemies.Add(new TerainImunneEnemy(3, 25, 8));
-            EnemyManager.enemies.Add(new TerainImunneEnemy(3, 34, 8));
-            EnemyManager.enemies.Add(new StrongEnemy(3, 33, 15));
-            EnemyManager.enemies.Add(new Enemy(5, 26, 16));
-            EnemyManager.enemies.Add(new Enemy(5, 19, 21));
-            EnemyManager.enemies.Add(new Enemy(5, 21, 21));
-            EnemyManager.enemies.Add(new LostEnemy(3, 29, 16));
-            EnemyManager.enemies.Add(new LostEnemy(3, 33, 12));
-            EnemyManager.enemies.Add(new LostEnemy(3, 41, 20));
-            EnemyManager.enemies.Add(new Enemy(5, 40, 22));
-            EnemyManager.enemies.Add(new Enemy(5, 42, 22));
-            EnemyManager.enemies.Add(new TerainImunneEnemy(3, 57, 19));
-            EnemyManager.enemies.Add(new StrongEnemy(3, 53, 19));
-            EnemyManager.enemies.Add(new TerainImunneEnemy(3, 57, 19));
-            EnemyManager.enemies.Add(new Enemy(5, 66, 19));
-            EnemyManager.enemies.Add(new TerainImunneEnemy(3, 47, 6));
-            EnemyManager.enemies.Add(new Enemy(5, 47, 0));
-            EnemyManager.enemies.Add(new TerainImunneEnemy(3, 58, 4));
-            EnemyManager.enemies.Add(new StrongEnemy(5, 58, 5));
-            EnemyManager.enemies.Add(new Enemy(5, 58, 6));
-            EnemyManager.enemies.Add(new StrongEnemy(5, 43, 2));
-            EnemyManager.enemies.Add(new LostEnemy(3, 58, 14));
-            EnemyManager.enemies.Add(new StrongEnemy(5, 56, 12));
-            EnemyManager.enemies.Add(new StrongEnemy(5, 59, 11));
-            EnemyManager.enemies.Add(new StrongEnemy(5, 80, 7));
-            EnemyManager.enemies.Add(new Enemy(5, 85, 4));
-            EnemyManager.enemies.Add(new Enemy(5, 79, 4));
-            EnemyManager.enemies.Add(new TerainImunneEnemy(3, 77, 7));
-            EnemyManager.enemies.Add(new TerainImunneEnemy(3, 79, 21));
-            EnemyManager.enemies.Add(new StrongEnemy(5, 79, 19));
-            EnemyManager.enemies.Add(new Enemy(5, 73, 18));
-            EnemyManager.enemies.Add(new Enemy(5, 73, 23));
-            EnemyManager.enemies.Add(new Enemy(5, 79, 23));
+            // NICK CHANGE: no need to write EnemyManager.enemies while we're inside EnemyManager
+            enemies.Clear();
+            enemies.Add(new Enemy(4, 4, 3));
+            enemies.Add(new LostEnemy(2, 14, 3));
+            enemies.Add(new Enemy(21, 0, 3));
+            enemies.Add(new Enemy(31, 1, 3));
+            enemies.Add(new StrongEnemy(14, 16, 5));
+            enemies.Add(new TerrainImmuneEnemy(13, 14, 3));
+            enemies.Add(new TerrainImmuneEnemy(15, 14, 3));
+            enemies.Add(new TerrainImmuneEnemy(19, 17, 3));
+            enemies.Add(new TerrainImmuneEnemy(8, 16, 3));
+            enemies.Add(new Enemy(19, 10, 5));
+            enemies.Add(new TerrainImmuneEnemy(20, 2, 3));
+            enemies.Add(new TerrainImmuneEnemy(27, 2, 3));
+            enemies.Add(new TerrainImmuneEnemy(25, 8, 3));
+            enemies.Add(new TerrainImmuneEnemy(34, 8, 3));
+            enemies.Add(new StrongEnemy(33, 15, 3));
+            enemies.Add(new Enemy(26, 16, 5));
+            enemies.Add(new Enemy(19, 21, 5));
+            enemies.Add(new Enemy(21, 21, 5));
+            enemies.Add(new LostEnemy(29, 16, 3));
+            enemies.Add(new LostEnemy(33, 12, 3));
+            enemies.Add(new LostEnemy(41, 20, 3));
+            enemies.Add(new Enemy(40, 22, 5));
+            enemies.Add(new Enemy(42, 22, 5));
+            enemies.Add(new TerrainImmuneEnemy(57, 19, 3));
+            enemies.Add(new StrongEnemy(53, 19, 3));
+            // NICK CHANGE: Dupe enemy from line 46
+            //EnemyManager.enemies.Add(new TerrainImmuneEnemy(57, 19, 3));
+            enemies.Add(new Enemy(66, 19, 5));
+            enemies.Add(new TerrainImmuneEnemy(47, 6, 3));
+            enemies.Add(new Enemy(47, 0, 5));
+            enemies.Add(new TerrainImmuneEnemy(58, 4, 3));
+            enemies.Add(new StrongEnemy(58, 5, 5));
+            enemies.Add(new Enemy(58, 6, 5));
+            enemies.Add(new StrongEnemy(43, 2, 5));
+            enemies.Add(new LostEnemy(58, 14, 3));
+            enemies.Add(new StrongEnemy(56, 12, 5));
+            enemies.Add(new StrongEnemy(59, 11, 5));
+            enemies.Add(new StrongEnemy(80, 7, 5));
+            enemies.Add(new Enemy(85, 4, 5));
+            enemies.Add(new Enemy(79, 4, 5));
+            enemies.Add(new TerrainImmuneEnemy(77, 7, 3));
+            enemies.Add(new TerrainImmuneEnemy(79, 21, 3));
+            enemies.Add(new StrongEnemy(79, 19, 5));
+            enemies.Add(new Enemy(73, 18, 5));
+            enemies.Add(new Enemy(73, 23, 5));
+            enemies.Add(new Enemy(79, 23, 5));
         }
-
     }
 }

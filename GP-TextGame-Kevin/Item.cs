@@ -1,37 +1,36 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+// NICK CHANGE: Added this to use the map offset.
+using FirstPlayable_GP2_Kevin;
+// NICK CHANGE: Unused
+//using System.Collections.Generic;
+//using System.Linq;
+//using System.Text;
+//using System.Threading.Tasks;
 
 namespace GP_TextGame_Kevin
 {
     internal abstract class Item
     {
-        public int _xPos;
-        public int _yPos;
-        protected string _icon = "T";
+        public int xPos;
+        public int yPos;
+        protected char icon = 'T';
         protected ConsoleColor color = ConsoleColor.Black;
         public bool hasBeenUsed = false;
         public Item(int x, int y)
         {
-            _xPos = x;
-            _yPos = y;
+            xPos = x;
+            yPos = y;
         }
-        public virtual void use()
+        public virtual void Use()
         {
             hasBeenUsed = true;
         }
         public void Draw()
         {
             Console.BackgroundColor = color;
-            Console.SetCursorPosition(_xPos + 5, _yPos + 5);
-            Console.Write(_icon);
+            Console.SetCursorPosition(xPos + Map.OffsetX, yPos + Map.OffsetY);
+            Console.Write(icon);
             Console.BackgroundColor = ConsoleColor.Black;
-            Console.SetCursorPosition(0, 0);
         }
-        
-
-
     }
 }

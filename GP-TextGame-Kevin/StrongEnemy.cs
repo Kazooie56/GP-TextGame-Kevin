@@ -1,22 +1,22 @@
 ﻿using FirstPlayable_GP2_Kevin;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
+// NICK CHANGE: Unused
+//using System;
+//using System.Collections.Generic;
+//using System.Linq;
+//using System.Text;
+//using System.Threading.Tasks;
 
 namespace GP_TextGame_Kevin
 {
     internal class StrongEnemy : Enemy
     {
-
-
-        public StrongEnemy(int HP, int x, int y) : base(HP, x, y)
+        public StrongEnemy(int x, int y, int HP) : base(x, y, HP)
         {
             //changes how enemy is drawn
             _icon = '!';
         }
-        protected override void Setstrength()
+        protected override void SetStrength()
         {
             strength = 5;
         }
@@ -32,16 +32,16 @@ namespace GP_TextGame_Kevin
                 {
                     if (EnemyManager.enemies[i]._xPos == newX && EnemyManager.enemies[i]._yPos == newY)
                     {
-
                         return;
                     }
                 }
+
                 //attacks player
-                if (GameManager.player._xPos == newX && GameManager.player._yPos == newY)
+                if (GameManager.player.xPos == newX && GameManager.player.yPos == newY)
                 {
-                    
-                    GameManager.player._health.TakeDamage(strength);
+                    GameManager.player.health.TakeDamage(strength);
                 }
+
                 //moves normally if on grass
                 else if (spaceMovedTo == "clear")
                 {
@@ -73,15 +73,5 @@ namespace GP_TextGame_Kevin
                 moveStall -= 1;
             }
         }
-
-
-        
-
-
-
-
-
-
-
     }
 }

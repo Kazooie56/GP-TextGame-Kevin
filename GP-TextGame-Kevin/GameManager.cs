@@ -2,129 +2,113 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
+// NICK CHANGE: Unused
+//using System.Text;
+//using System.Threading.Tasks;
 
 namespace GP_TextGame_Kevin
 {
     internal class GameManager
     {
-        
-        
-        private GameManager()
-        {
+        // NICK CHANGE: Constants to replace magic numbers
+        const int MinWindowWidth = 130;
+        const int MinWindowHeight = 30;
+        const int EnemyKillScore = 10;
 
-        }
-        private static GameManager _instance;
-        public static GameManager Instance
-        {
-            get
-            {
-                if(_instance == null)
-                {
-                    _instance = new GameManager();
-                }
-                return _instance;
-            }
-            
-            
-        }
+        public const int forestHeal = 3;
+        public const int swampDamage = 3;
+        public static int Score = 0;
+
+        public static Map map = new Map();
+        public static Player player = new Player(0, 0, 100);
+
+        // NICK CHANGE: Everything in this code is static,
+        // and the only time instance is used is directly here. so it's unnecessary.
+
+        //private GameManager() { }
+
+        //private static GameManager _instance;
+        //public static GameManager Instance
+        //{
+        //    get
+        //    {
+        //        if (_instance == null)
+        //        {
+        //            _instance = new GameManager();
+        //        }
+        //        return _instance;
+        //    }
+        //}
         public static void RemoveUsedOrDead()
         {
-            List<int> enemiesToRemove = new List<int>();
-            List<int> itemsToRemove = new List<int>();
-            //removes dead enemies
-            if (EnemyManager.enemies.Any())
+            // NICK CHANGE: Loop backwards with RemoveAt so removals never shift an index we still need
+            for (int i = EnemyManager.enemies.Count - 1; i >= 0; i--)
             {
-                for (int i = 0; i < EnemyManager.enemies.Count; i++)
+                var enemy = EnemyManager.enemies[i];
+                if (!enemy._health.GetIsAlive())
                 {
-                    if (!EnemyManager.enemies[i]._health.CheakIfAlive())
-                    {
-                        GameManager.map.redrawSpace(EnemyManager.enemies[i]._xPos, EnemyManager.enemies[i]._yPos);
-                        enemiesToRemove.Add(i);
-                    }
-                }
-                if (enemiesToRemove.Any())
-                {
-                    for (int i = 0; i < enemiesToRemove.Count; i++)
-                    {
-
-                        GameManager.player._lastEnemy = 0;
-                        EnemyManager.enemies.Remove(EnemyManager.enemies[enemiesToRemove[i]]);
-                        GameManager.Score += 10;
-                    }
-                    enemiesToRemove.Clear();
+                    map.RedrawSpace(enemy._xPos, enemy._yPos);
+                    EnemyManager.enemies.RemoveAt(i);
+                    player.lastEnemy = 0;
+                    Score += EnemyKillScore;
+                    QuestManager.EnemyKilled();         // NICK CHANGE: counts towards quest
                 }
             }
 
-            //removes used items
-            if (Item_manager.items.Any())
+            for (int i = ItemManager.items.Count - 1; i >= 0; i--)
             {
-                for (int i = 0; i < Item_manager.items.Count; i++)
+                Item item = ItemManager.items[i];
+                if (item.hasBeenUsed)
                 {
-                    if (Item_manager.items[i].hasBeenUsed)
-                    {
-                        GameManager.map.redrawSpace(Item_manager.items[i]._xPos, Item_manager.items[i]._yPos);
-                        itemsToRemove.Add(i);
-                    }
-                }
-                if (itemsToRemove.Any())
-                {
-                    for (int i = 0; i < itemsToRemove.Count; i++)
-                    {
-
-
-
-
-                        Item_manager.items.Remove(Item_manager.items[itemsToRemove[i]]);
-
-                    }
-                    itemsToRemove.Clear();
+                    map.RedrawSpace(item.xPos, item.yPos);
+                    ItemManager.items.RemoveAt(i);
                 }
             }
         }
+
         public static void CheckWindow()
         {
-            if (Console.WindowWidth < 130)
+            // NICK CHANGE: cut down on one redraw and removed magic numbers
+            bool resized = false;
+
+            if (Console.WindowWidth < MinWindowWidth)
             {
-                Console.WindowWidth = 130;
+                Console.WindowWidth = MinWindowWidth;
+                resized = true;
+            }
+            if (Console.WindowHeight < MinWindowHeight)
+            {
+                Console.WindowHeight = MinWindowHeight;
+                resized = true;
+            }
+
+            if (resized)
+            {
                 Console.Clear();
-                GameManager.map.DrawMap();
+                map.DrawMap();
                 Draw();
             }
-            if (Console.WindowHeight < 30)
-            {
-                Console.WindowHeight = 30;
-                Console.Clear();
-                GameManager.map.DrawMap();
-                Draw();
-            }
-            
         }
         public static void Draw()
         {
-            GameManager.CheckWindow();
-            GameManager.player.DrawPlayer();
-            GameManager.CheckWindow();
+            // NICK CHANGE: Removed the two CheckWindow calls. CheckWindow called Draw and Draw
+            // called CheckWindow.
+            player.DrawPlayer();
             EnemyManager.boss.DrawEnemy();
-            if (Item_manager.items.Any())
+
+            foreach (Item item in ItemManager.items)
             {
-                for (int i = 0; i < Item_manager.items.Count; i++)
-                {
-
-                    Item_manager.items[i].Draw();
-
-                }
+                item.Draw();
             }
 
-            if (EnemyManager.enemies.Any())
+            foreach (var enemy in EnemyManager.enemies)
             {
-                for (int i = 0; i < EnemyManager.enemies.Count; i++)
-                {
-
-                    EnemyManager.enemies[i].DrawEnemy();
-                }
+                enemy.DrawEnemy();
             }
+
+            // NICK CHANGE: Cursor reset happens once here instead of inside every Item.Draw
+            Console.SetCursorPosition(0, 0);
         }
         public static void Move()
         {
@@ -134,23 +118,11 @@ namespace GP_TextGame_Kevin
             {
                 for (int i = 0; i < EnemyManager.enemies.Count; i++)
                 {
-
-
                     EnemyManager.enemies[i].MoveDirection();
-
                 }
             }
 
-
             EnemyManager.boss.MoveDirection();
         }
-        public static int forestHeal = 3;
-        public static int swampDamage = 3;
-        public static int Score = 0;
-        
-        public static Map map = new Map();
-        
-        public static  Player player = new Player(100, 0, 0);
-        
     }
 }

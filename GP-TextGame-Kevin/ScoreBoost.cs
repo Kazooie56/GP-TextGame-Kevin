@@ -1,24 +1,26 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+// NICK CHANGE: Unused
+//using System.Collections.Generic;
+//using System.Linq;
+//using System.Text;
+//using System.Threading.Tasks;
 
 namespace GP_TextGame_Kevin
 {
-    internal class ScoreBoost :Item
+    internal class ScoreBoost : Item
     {
-        private int _Score;
-        public ScoreBoost(int x, int y, int Score) : base(x, y)
+        private int scoreValue;
+        public ScoreBoost(int x, int y, int scoreValue) : base(x, y)
         {
-            _Score = Score;
-            _icon = "S";
+            // this denotes which one is which since they have the same name because they share the same idea
+            this.scoreValue = scoreValue; 
+            icon = 'S';
             color = ConsoleColor.Yellow;
         }
-        public override void use()
+        public override void Use()
         {
-            GameManager.Score+= _Score;
-            base.use();
+            GameManager.Score += scoreValue;
+            base.Use();
         }
     }
 }

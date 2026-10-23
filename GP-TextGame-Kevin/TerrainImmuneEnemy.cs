@@ -1,15 +1,17 @@
 ﻿using FirstPlayable_GP2_Kevin;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
+// NICK CHANGE: UNUSED
+//using System.Collections.Generic;
+//using System.Linq;
+//using System.Text;
+//using System.Threading.Tasks;
 
 namespace GP_TextGame_Kevin
 {
-    internal class TerainImunneEnemy : Enemy
+    internal class TerrainImmuneEnemy : Enemy
     {
-        public TerainImunneEnemy(int HP, int x, int y) : base(HP, x, y)
+        public TerrainImmuneEnemy(int x, int y, int HP) : base(x, y, HP)
         {
             //changes how enemy is drawn
             _icon = '%';
@@ -17,7 +19,6 @@ namespace GP_TextGame_Kevin
 
         protected override void Move(int newX, int newY)
         {
-
             if (moveStall <= 0)
             {
                 //checks space enemy tries to move to
@@ -27,18 +28,16 @@ namespace GP_TextGame_Kevin
                 {
                     if (EnemyManager.enemies[i]._xPos == newX && EnemyManager.enemies[i]._yPos == newY)
                     {
-
                         return;
                     }
                 }
                 //attacks player
-                if (GameManager.player._xPos == newX && GameManager.player._yPos == newY)
+                if (GameManager.player.xPos == newX && GameManager.player.yPos == newY)
                 {
-                    //enemies have a chance to miss
-                    Random ran = new Random();
-                    if (ran.Next(0, 10) > 0)
+                    // Using built in random
+                    if (random.Next(0, 10) > 0)
                     {
-                        GameManager.player._health.TakeDamage(strength);
+                        GameManager.player.health.TakeDamage(strength);
                     }
                 }
                 //moves normally if on grass
@@ -47,7 +46,6 @@ namespace GP_TextGame_Kevin
                     _xPos = newX;
                     _yPos = newY;
                 }
-
             }
             else
             {

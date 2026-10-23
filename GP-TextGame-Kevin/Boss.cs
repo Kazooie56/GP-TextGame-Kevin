@@ -1,20 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using FirstPlayable_GP2_Kevin;
+// NICK CHANGE: Unused
+//using System.Collections.Generic;
+//using System.Linq;
+//using System.Text;
+//using System.Threading.Tasks;
 
 namespace GP_TextGame_Kevin
 {
     internal class Boss : Enemy
     {
-        public Boss(int HP, int x, int y) : base(HP, x, y)
+        public Boss(int x, int y, int HP) : base(x, y, HP)
         {
             //changes how enemy is drawn
             _icon = 'B';
         }
-        protected override void Setstrength()
+        protected override void SetStrength()
         {
             strength = 5;
         }
@@ -30,14 +31,13 @@ namespace GP_TextGame_Kevin
                 {
                     if (EnemyManager.enemies[i]._xPos == newX && EnemyManager.enemies[i]._yPos == newY)
                     {
-
                         return;
                     }
                 }
                 //attacks player
-                if (GameManager.player._xPos == newX && GameManager.player._yPos == newY)
+                if (GameManager.player.xPos == newX && GameManager.player.yPos == newY)
                 {
-                    GameManager.player._health.TakeDamage(strength);
+                    GameManager.player.health.TakeDamage(strength);
                 }
                 //moves normally if on grass
                 else if (spaceMovedTo == "clear")
@@ -63,24 +63,28 @@ namespace GP_TextGame_Kevin
                     _yPos = newY;
                     _health.TakeDamage(GameManager.swampDamage);
                 }
-                Random stall = new Random();
-                int stallInt = stall.Next(0, 4);
-                moveStall += stallInt;
-                if (moveStall == 0)
+
+                // NICK CHANGE: uses shared random from enemy instead of making one each frame
+                // The roll is how many extra frames the boss stalls, and the longer the stall, the harder the next hit
+                int stallRoll = random.Next(4);
+                moveStall += stallRoll;
+
+                // NICK CHANGE: originally, when you checked if movestall was 0, it checked movestall instead of the stallRoll
+                // this switch is easier to read and fixes the issue.
+                switch (stallRoll)
                 {
-                    strength = 3;
-                }
-                else if (stallInt == 1)
-                {
-                    strength = 5;
-                }
-                else if (stallInt == 2)
-                {
-                    strength = 10;
-                }
-                else
-                {
-                    strength = 30;
+                    case 0:
+                        strength = 3;
+                        break;
+                    case 1:
+                        strength = 5;
+                        break;
+                    case 2:
+                        strength = 10;
+                        break;
+                    default:
+                        strength = 30;
+                        break;
                 }
             }
             else

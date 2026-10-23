@@ -16,3 +16,21 @@ C:\nscc_work\GP-TextGame-Kevin\GP-TextGame-Kevin\bin\Debug\MapText.txt
 C:\nscc_work\GP-TextGame-Kevin\GP-TextGame-Kevin\bin\Debug\GP-TextGame-Kevin.exe.config
 C:\nscc_work\GP-TextGame-Kevin\GP-TextGame-Kevin\bin\Debug\GP-TextGame-Kevin.exe
 C:\nscc_work\GP-TextGame-Kevin\GP-TextGame-Kevin\bin\Debug\GP-TextGame-Kevin.pdb
+C:\Users\nickp\Desktop\2nd Semester School\School Projects\GameProgramming3\GP-TestGame-Kevin\GP-TextGame-Kevin\GP-TextGame-Kevin\bin\Debug\MapText.txt
+C:\Users\nickp\Desktop\2nd Semester School\School Projects\GameProgramming3\GP-TestGame-Kevin\GP-TextGame-Kevin\GP-TextGame-Kevin\bin\Debug\GP-TextGame-Kevin.exe.config
+C:\Users\nickp\Desktop\2nd Semester School\School Projects\GameProgramming3\GP-TestGame-Kevin\GP-TextGame-Kevin\GP-TextGame-Kevin\bin\Debug\GP-TextGame-Kevin.exe
+C:\Users\nickp\Desktop\2nd Semester School\School Projects\GameProgramming3\GP-TestGame-Kevin\GP-TextGame-Kevin\GP-TextGame-Kevin\bin\Debug\GP-TextGame-Kevin.pdb
+C:\Users\nickp\Desktop\2nd Semester School\School Projects\GameProgramming3\GP-TestGame-Kevin\GP-TextGame-Kevin\GP-TextGame-Kevin\obj\Debug\GP-TextGame-Kevin.csproj.AssemblyReference.cache
+C:\Users\nickp\Desktop\2nd Semester School\School Projects\GameProgramming3\GP-TestGame-Kevin\GP-TextGame-Kevin\GP-TextGame-Kevin\obj\Debug\GP-TextGame-Kevin.exe.config
+C:\Users\nickp\Desktop\2nd Semester School\School Projects\GameProgramming3\GP-TestGame-Kevin\GP-TextGame-Kevin\GP-TextGame-Kevin\obj\Debug\GP-TextGame-Kevin.csproj.CoreCompileInputs.cache
+C:\Users\nickp\Desktop\2nd Semester School\School Projects\GameProgramming3\GP-TestGame-Kevin\GP-TextGame-Kevin\GP-TextGame-Kevin\obj\Debug\GP-TextGame-Kevin.exe
+C:\Users\nickp\Desktop\2nd Semester School\School Projects\GameProgramming3\GP-TestGame-Kevin\GP-TextGame-Kevin\GP-TextGame-Kevin\obj\Debug\GP-TextGame-Kevin.pdb
+C:\Users\nickp\Desktop\2nd Semester School\Code\3. Projects\GP-TestGame-Kevin\GP-TextGame-Kevin\GP-TextGame-Kevin\bin\Debug\MapText.txt
+C:\Users\nickp\Desktop\2nd Semester School\Code\3. Projects\GP-TestGame-Kevin\GP-TextGame-Kevin\GP-TextGame-Kevin\bin\Debug\GP-TextGame-Kevin.exe.config
+C:\Users\nickp\Desktop\2nd Semester School\Code\3. Projects\GP-TestGame-Kevin\GP-TextGame-Kevin\GP-TextGame-Kevin\bin\Debug\GP-TextGame-Kevin.exe
+C:\Users\nickp\Desktop\2nd Semester School\Code\3. Projects\GP-TestGame-Kevin\GP-TextGame-Kevin\GP-TextGame-Kevin\bin\Debug\GP-TextGame-Kevin.pdb
+C:\Users\nickp\Desktop\2nd Semester School\Code\3. Projects\GP-TestGame-Kevin\GP-TextGame-Kevin\GP-TextGame-Kevin\obj\Debug\GP-TextGame-Kevin.csproj.AssemblyReference.cache
+C:\Users\nickp\Desktop\2nd Semester School\Code\3. Projects\GP-TestGame-Kevin\GP-TextGame-Kevin\GP-TextGame-Kevin\obj\Debug\GP-TextGame-Kevin.csproj.CoreCompileInputs.cache
+C:\Users\nickp\Desktop\2nd Semester School\Code\3. Projects\GP-TestGame-Kevin\GP-TextGame-Kevin\GP-TextGame-Kevin\obj\Debug\GP-TextGame-Kevin.exe
+C:\Users\nickp\Desktop\2nd Semester School\Code\3. Projects\GP-TestGame-Kevin\GP-TextGame-Kevin\GP-TextGame-Kevin\obj\Debug\GP-TextGame-Kevin.pdb
+C:\Users\nickp\Desktop\2nd Semester School\Code\3. Projects\GP-TestGame-Kevin\GP-TextGame-Kevin\GP-TextGame-Kevin\obj\Debug\GP-TextGame-Kevin.exe.config
